@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employees</title>
+    <link rel="stylesheet" th:href="@{/index-style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="row header">
+            <h2>Employees List</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a th:href="@{/employees/showNewEmployeeForm}" class="btn add-newemployee-btn">Add New Employee</a>
+            </div>
+        </div>
+        <div class="table-container">
+        <table class="table table-striped table-bordered">
+            <thead class="table-header">
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Department</th>
+                    <th>Skills</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the list of employees -->
+                <tr th:if="${employees.isEmpty()}">
+                    <td colspan="7">No data available</td>
+                </tr>
+                <tr th:each="employee, rowStat : ${employees}">
+                    <td th:text="${rowStat.index + 1}">1</td>
+                    <td th:text="${employee.employeeName}">Name</td>
+                    <td th:text="${employee.employeeEmail}">Email</td>
+                    <td th:text="${employee.employeePhoneNumber}">Phone Number</td>
+                    <td th:text="${employee.employeeDepartment}">Department</td>
+                    <td th:text="${employee.employeeSkills}">Skills</td>
+                    <td>
+                        <!-- Edit and Delete actions -->
+                        <a th:href="@{/employees/showFormForUpdate/{id}(id=${employee.id})}" class="btn update-btn">Edit</a>
+                        <a th:href="@{/employees/deleteEmployee/{id}(id=${employee.id})}" class="btn delete-btn">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</body>
+</html>

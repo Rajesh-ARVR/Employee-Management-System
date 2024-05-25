@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website with Login Form</title>
+    <link rel="stylesheet" th:href="@{/login-style.css}" />
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+<body>
+<!-- Home -->
+<section class="home show">
+    <div class="form_container">
+        <!-- Login Form -->
+        <div class="form login_form">
+            <form th:action="@{/login}" method="post">
+                <h2>Admin Login</h2>
+
+                <div class="input_box">
+                    <input type="text" name="username" placeholder="Enter your username" required />
+                    <i class="uil uil-envelope-alt email"></i>
+                </div>
+                <div class="input_box">
+                    <input type="password" name="password" placeholder="Enter your password" required />
+                    <i class="uil uil-lock password"></i>
+                    <i class="uil uil-eye-slash pw_hide"></i>
+                </div>
+
+                <!-- Error message container -->
+                <div th:if="${errorMessage}" class="error-message" style="color: red; margin-top: 10px;">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+
+                <!-- Move the button inside the form -->
+                <button class="button" type="submit">Login Now</button>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="/login-script.js"></script>
+</body>
+</html>

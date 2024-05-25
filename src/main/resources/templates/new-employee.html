@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Employee</title>
+    <link rel="stylesheet" th:href="@{/new-employee-style.css}" />
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="form-title">Add New Employee</h2>
+        <form id="employeeForm" th:action="@{/employees/saveEmployee}" th:object="${employee}" method="post" class="employee-form" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="employeeName">Name:</label>
+                <input type="text" id="employeeName" th:field="*{employeeName}" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="employeeEmail">Email:</label>
+                <input type="email" id="employeeEmail" th:field="*{employeeEmail}" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="employeePhoneNumber">Phone Number:</label>
+                <input type="tel" id="employeePhoneNumber" th:field="*{employeePhoneNumber}" class="form-control" required />
+            </div>
+            <div th:if="${errorMessage}" style="color: red;">
+                <p th:text="${errorMessage}"></p>
+            </div>
+            <div class="form-group">
+                <label for="employeeDepartment">Department:</label>
+                <select id="employeeDepartment" th:field="*{employeeDepartment}" class="form-control" required>
+                    <option value="">Select Department</option>
+                    <option value="IT">IT</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="IT">Technical Support</option>
+                    <option value="HR">Web Developer</option>
+                    <option value="Finance">Marketing</option>
+                    <option value="IT">Administration</option>
+                    <option value="HR">System Administrator</option>
+                    <option value="Finance">Network Administrator</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Skills:</label>
+                <div id="skills-container" class="skills-container">
+                    <!-- Add checkboxes dynamically here -->
+                </div>
+            </div>
+            <div id="errorMessage" style="color: red; display: none;">Please select at least one skill.</div>
+            <div class="form-group">
+                <button type="submit" class="submit-button">Save</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="/new-employee-script.js"></script>
+</body>
+</html>
